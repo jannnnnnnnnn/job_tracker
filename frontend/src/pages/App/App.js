@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 
 import logo from './logo.svg';
 import './App.css';
+import NavBar from '../../components/NavBar/NavBar'
 
 class App extends Component {
   state = {
-    todos: []
+    todos: [],
+    searchTerm:null,
   };
   async componentDidMount() {
     try {
@@ -18,11 +20,18 @@ class App extends Component {
       console.log(e);
     }
   }
-
+  handleSearchInputChange=(e)=>{
+    this.setState({[e.target.name]:e.target.value})
+  }
+  handleSearchClick=()=>{
+    console.log("i am in handleSearchClick")
+    //api call using the state SearchTerm 
+  }
   render() {
     return (
       <div>
         <div>test</div>
+        <NavBar handleSearchInputChange={this.handleSearchInputChange} handleSearchClick={this.handleSearchClick}/>
         {this.state.todos.map(item => (
           <div key={item.id}>
             <h1>{item.title}</h1>
